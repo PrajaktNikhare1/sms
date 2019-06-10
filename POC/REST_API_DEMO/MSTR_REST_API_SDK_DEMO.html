@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <script src="libs/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+    <title>Push Data Demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!--<link rel="stylesheet" href="css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="css/font-awesome.min.css">-->
+    <link rel="stylesheet" href="css/c3.min.css">
+    <script src="libs/jquery.js"></script>
+    <script src="libs/d3.min.js"></script>
+    <script src="libs/c3.min.js"></script>
+    <script src="libs/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <script type="text/javascript" src="assets/DATAMODEL_DEMO.js"></script>
+    <script type="text/javascript" src="assets/DATA_DEMO.json"></script>
+    <!--<script type="text/javascript" src="js/demo.js"></script>-->
+    <script src="js/demo.js" type="text/javascript" charset="utf-8"></script>
+	<!--<script type="text/javascript" src="http://localhost:9191/MicroStrategyLibrary11/javascript/embeddinglib.js"></script>-->
+	<script type="text/javascript" src="libs/embeddinglib.js"></script>
+
+</head>
+
+<body>
+    <div class="container">
+
+        <!--REQUESTED OBJECTS-->
+
+        <div class="starter-template">
+
+            <h1> MSTR REST API SDK DEMO </h1>
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" id="navTabs" role="tablist" style="margin-bottom: 20px">
+                <li role="presentation" class="active"><a href="#configuration-tab" aria-controls="home" role="tab" data-toggle="tab">Step 1 : Login</a></li>
+                <li role="presentation"><a href="#customReport-tab" aria-controls="profile" role="tab" data-toggle="tab">Step 2 : Custom Report</a></li>
+                <li role="presentation"><a href="#dataset-creation-tab" aria-controls="profile" role="tab" data-toggle="tab">Step 3 : Create dataset</a></li>
+                <li role="presentation"><a href="#customSearch-tab" aria-controls="profile" role="tab" data-toggle="tab">Step 4 : Search data</a></li>
+				<li role="presentation"><a href="#embeddingApi-tab" aria-controls="profile" role="tab" data-toggle="tab">Step 5 : Embedding API </a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="configuration-tab">
+                    <div class="row">
+
+                        <div class="panel col-xs-6">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">IServer</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group row">
+                                    <label for="iserver-name" class="col-xs-2 col-form-label">Name</label>
+                                    <div class="col-xs-10">
+                                        <input class="form-control" id="iserver-name" type="text" value="">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="iserver-port" class="col-xs-2 col-form-label">Port</label>
+                                    <div class="col-xs-10">
+                                        <input class="form-control" id="iserver-port" type="text" value="">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="project-name" class="col-xs-2 col-form-label">Project</label>
+                                    <div class="col-xs-10">
+                                        <input class="form-control" id="project-name" type="text" value="">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="project-name" class="col-xs-2 col-form-label">Username</label>
+                                    <div class="col-xs-10">
+                                        <input class="form-control" id="username" type="text" value="">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="password" class="col-xs-2 col-form-label">Password</label>
+                                    <div class="col-xs-10">
+                                        <input class="form-control" id="password" type="password" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="password" class="col-xs-2 col-form-label">ReportID</label>
+                                    <div class="col-xs-10">
+                                        <input class="form-control" id="reportid" type="text" value="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel col-xs-6">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">REST API Server</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group row">
+                                    <label for="rest-server-name" class="col-xs-2 col-form-label">Name</label>
+                                    <div class="col-xs-10">
+                                        <input class="form-control" id="rest-server-name" type="text" value="">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="rest-server-port" class="col-xs-2 col-form-label">Port</label>
+                                    <div class="col-xs-10">
+                                        <input class="form-control" id="rest-server-port" type="text" value="">
+                                    </div>
+                                </div>
+								
+								<div class="form-group row">
+                                    <label for="authTokenRESTAPI" class="col-xs-2 col-form-label">Token</label>
+                                    <div class="col-xs-10">
+                                        <input class="form-control" id="authTokenRESTAPI" type="text" value="">
+                                    </div>
+                                </div>
+								
+								
+
+                                <div class="form-group row" id="is-https">
+                                    <div class="col-xs-10">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox"> Https connection
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-2">
+                                        <button onClick="createSession()" class="btn btn-primary" id="create-session-button" style="align-content: flex-start" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing request...">
+                                            Login
+                                        </button>
+                                    </div>
+                                    <div class="alert alert-success fade in col-md-8" id="login-success-alert" style="display: none">
+                                        <strong>Success!</strong> A session was created
+										
+										<label for="auth-token-value" class="col-xs-2 col-form-label"></label>
+                                    </div>
+									
+                                    <div class="alert alert-danger fade in col-md-8" id="login-failure-alert" style="display: none">
+                                        <strong>Failure</strong> The session could not be created
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div role="tabpanel" class="tab-pane" id="customReport-tab">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><label for="json-response" id="label-MSTR-ReportName-successful" style="color: #3c763d; visibility: :hidden" ></label></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <button onClick="sendReportDataRequest()" class="btn btn-primary" id="show-Report-button" style="align-content: flex-start" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing request...">Show Report</button>
+                            <style>
+                                table {
+                                    width: 100%;
+                                }
+                                
+                                table#reportTable tr:nth-child(even) {
+                                    background-color: #eee;
+                                }
+                                
+                                table#reportTable tr:nth-child(odd) {
+                                    background-color: #fff;
+                                }
+                                
+                                table#reportTable th {
+                                    background-color: black;
+                                    color: white;
+                                    align="left"
+                                }
+                            </style>
+                            <div style="overflow:scroll;height:300px;width:100%;overflow:auto">
+                                <table id="reportTable"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="dataset-creation-tab">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Request</h3>
+                    </div>
+                    <div class="panel-body">
+                        <label for="editor"> A. Configure dataset creation </label>
+                        <div id="editor">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6" style="text-align: left">
+                                <div class="form-group row">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label for="upload-file">B. Select json data file </label>
+                                    </div>
+                                    <input id="upload-file" type="file">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <button onClick="createDataset()" class="btn btn-primary" id="create-dataset-button" style="align-content: flex-start" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing request...">
+                                    Create Dataset
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="panel col-lg-12">
+                        <div class="col-lg-12" id="json-response-container" style="visibility: hidden;">
+                            <div class="panel-heading">
+                                <h2 class="panel-title">Response</h2>
+                            </div>
+                            <div class="panel-body">
+                                <label for="json-response" id="label-dataset-creation-successful" style="color: #3c763d; visibility: :hidden">Your dataset has been created in your folder "My Reports" </label>
+
+                                <pre class="prettyprint lang-js">
+                                    <code class="language-js" id="json-response">  </code>
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--Search Demo Start-->
+
+                <div role="tabpanel" class="tab-pane" id="customSearch-tab">
+                    <div class="panel-heading">
+
+                    </div>
+                    <div class="panel-body">
+
+                        <div class="row">
+                            <button onClick="searchPage()" class="btn btn-primary" id="show-Report-button" style="align-content: flex-start" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing request...">Load Graph</button>
+                            <style>
+                                table {
+                                    width: 100%;
+                                }
+                                
+                                table#reportTable tr:nth-child(even) {
+                                    background-color: #eee;
+                                }
+                                
+                                table#reportTable tr:nth-child(odd) {
+                                    background-color: #fff;
+                                }
+                                
+                                table#reportTable th {
+                                    background-color: black;
+                                    color: white;
+                                    align="left"
+                                }
+                            </style>
+							<div id="searchBody" style="visibility :hidden">
+                            <div class="container-fluid" style="margin-top:10px;" >
+                                <div class="row" style="margin-top:10px;">
+                                    <div class="col-sm-6" style="border:1px solid gray">
+                                        <div id="chart_1"></div>
+                                    </div>
+                                    <div class="col-sm-6" style="border:1px solid gray">
+                                        <div id="chart_2"></div>
+                                    </div>
+                                    <div class="row" style="margin-top:10px;">
+                                        <div class="col-sm-6" style="border:1px solid gray">
+                                            <div id="chart_3"></div>
+										</div>	
+                                        <div class="col-sm-6" style="border:1px solid gray">
+										<div id="chart_4">
+										</div>
+                                        </div>
+                                    </div>
+									
+                                </div>
+                            </div>
+							</div>
+                        </div>
+                    </div>
+                </div>
+				 <!--Search Demo End-->
+				<!--Embedding API START-->
+						<div role="tabpanel" class="tab-pane" id="embeddingApi-tab">
+							<div class="panel-heading">
+                        
+							</div>
+							<div class="panel-body">
+								<div class="form-group row">
+                                    <label for="filterValue" class="col-xs-2 col-form-label">FilterValue</label>
+                                    <div class="col-xs-10">
+                                        <input class="form-control" id="filterValue" type="text" value="">
+                                    </div>
+                                </div>
+								<button onClick="embeddingAPIPage()" class="btn btn-primary" id="show-Report-button" style="align-content: flex-start" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing request...">Load Document</button>
+								<div id="mydossier" height="100%" width="100%"></div>
+								
+							</div>
+						</div>
+						<!--Embedding API STOP-->
+
+            </div>
+            <script type="text/javascript">
+                var demo = new Demo();
+                var searchPage = demo.searchPage;
+                var createDataset = demo.createDataset;
+
+                var createSession = demo.createSession;
+
+                var sendReportDataRequest = demo.sendReportDataRequest;
+				var embeddingAPIPage = demo.embeddingAPIPage;
+                var loadReportData = demo.getReportData;
+                demo.start();
+                var mstrReportName = demo.mstrReportName;
+                var reportJSONResponse = demo.reportJSONResponse;
+            </script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+[
+  {
+    "Advertiser_Name": "Advertiser 1",
+    "Advertiser_ID": 1,
+    "Agency_Name": "Agency 1",
+    "Agency_ID": 1,
+    "Property_ID": 1,
+	"Property_Name": "Property 1",
+    "Budget": 345566
+  },
+  {
+    "Advertiser_Name": "Advertiser 2",
+    "Advertiser_ID": 2,
+    "Agency_Name": "Agency 2",
+    "Agency_ID": 2,
+	"Property_ID": 1,
+    "Property_Name": "Property 1",
+    "Budget": 453645
+  },
+  {
+    "Advertiser_Name": "Advertiser 3",
+    "Advertiser_ID": 3,
+    "Agency_Name": "Agency 3",
+    "Agency_ID": 3,
+	"Property_ID": 2,
+    "Property_Name": "Property 2",
+    "Budget": 173454
+  },
+  {
+    "Advertiser_Name": "Advertiser 4",
+    "Advertiser_ID": 4,
+    "Agency_Name": "Agency 4",
+    "Agency_ID": 4,
+	"Property_ID": 2,
+    "Property_Name": "Property 2",
+    "Budget": 243524
+  }
+]

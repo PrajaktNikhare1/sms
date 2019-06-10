@@ -1,0 +1,72 @@
+<html>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<body>
+   <div class="container">
+       <div class="page-header">
+           <h1>Simple Embedding Sample With Event Handling</h1>
+       </div>
+   </div>
+   <div style="width: 20%; background-color: white; float:left;">
+       <div id="nav1" style="width: 100%; height: 50%;"></div>
+    <!--   <div id="nav2" style="width: 100%; height: 50%;"></div>-->
+
+   </div>
+   <div style="width: 80%; background-color: white; float:right;">
+       <div id="dossierContainer1" style="width: 100%; height: 50%;"></div>
+      <!-- <div id="dossierContainer2" style="width: 100%; height: 50%;"></div> -->
+   </div>
+
+</body>
+
+<!-- Replace path to point to the embeddingLib in your environment -->
+<!--<script src="http://POTWSWD00035LA.stg-tfayd.com:8080/MicroStrategyLibrary/javascript/embeddinglib.js"></script>-->
+<script src="http://localhost:8080/MicroStrategyLibraryUP1/javascript/embeddinglib.js"></script>
+
+<script>
+   //BEGIN CONFIG PARAMETERS -------------------------------------------------------------------------
+  baseRestURL = "http://localhost:8080/MicroStrategyLibraryUP1";
+  //baseRestURL = "http://potwswd00035lb.stg-tfayd.com:8080/MicroStrategyLibrary";
+   username = "206603762";
+   password = "1234";
+   projectID = "27DB4F8F4E17CD2FC97B05B96F292F5C";
+   dossierID = "3B44E08940D77A280A62B68C76874F6B";
+  // dossier2ID = "<DOSSIER2_ID>";
+   //END CONFIG PARAMETERS -------------------------------------------------------------------------
+
+   var dossier1 = null;
+  // var dossier2 = null;
+
+   //Form PostData for login REST request
+   var postData = {};
+   postData.username = username;
+   postData.password = password;
+   postData.loginMode = 1;
+
+   var projectUrl = baseRestURL + '/app/' + projectID;
+   var dossierUrl = projectUrl + '/' + dossierID;
+   console.log("DossierURL: " + dossierUrl);
+
+   //populate div with Dossier:
+   microstrategy.dossier.create({
+       placeholder: document.getElementById("dossierContainer1"),
+       url: dossierUrl,
+       enableCustomAuthentication: true,
+       enableResponsive: false,
+       customAuthenticationType: microstrategy.dossier.CustomAuthenticationType.AUTH_TOKEN,
+       getLoginToken: function() {
+			
+           return getXHRRequestPromise(baseRestURL+'/api/auth/login', postData, 'POST', 'application/json', 'x-mstr-authToken').then(function(authToken) {
+               return authToken;
+           })
+       }
+   }).then(function(dossier) {
+       //get hook to dossierObj
+       dossier1 = dossier;
+
+       var navDiv = document.getElementById("nav1");
+       createChapterPageNav(dossier1, navDiv);
+	   });
+</script>
+</html>

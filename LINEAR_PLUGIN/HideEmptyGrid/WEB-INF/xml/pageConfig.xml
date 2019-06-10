@@ -1,0 +1,19 @@
+<framework>
+  <pages>
+    <page name="rwd">
+      <addons>
+        <addon XMLmerge_id="50" name="com.NBCU.hideEmptyGrid.CustomHideEmptyGrid"/>
+      </addons>
+    </page>
+    <page name="oivm">
+      <addons>
+        <addon XMLmerge_id="50" name="com.NBCU.hideEmptyGrid.CustomHideEmptyGrid"/>
+      </addons>
+    </page>
+    <page name="Html5Vi">
+      <addons>
+        <addon XMLmerge_id="50" name="com.NBCU.hideEmptyGrid.CustomHideEmptyGrid"/>
+      </addons>
+    </page>
+  </pages>
+</framework>
